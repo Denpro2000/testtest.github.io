@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Итоги атомного проекта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Основные стили */
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(218, 229, 230);
+            min-height: 100vh;
+            min-width: 100%;
+            color: #193048;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .header {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #4a5568, #1a2b3c, #33475b);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .header-nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-buttons {
+            margin-right: 3%;
+            width: 130px;
+            height: 42px;
+            margin-left: 7px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 10px;
+            color: #193048;
+            transition: .2s linear;
+            background: #E0E0E0;
+        }
+        
+        .header-buttons:hover {
+            transform: rotateZ(7deg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .content-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #193048;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #1a4480;
+            padding-bottom: 15px;
+        }
+        
+        .main-content {
+            text-align: left;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #193048;
+        }
+        
+        .main-content h2 {
+            color: #1a4480;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1a4480;
+        }
+        
+        .main-content p {
+            margin-bottom: 20px;
+        }
+        
+        .key-points {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #1a4480;
+        }
+        
+        .key-points h3 {
+            color: #1a4480;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .key-points ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .key-points li {
+            margin-bottom: 10px;
+        }
+        
+        .conclusion {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            font-style: italic;
+            border-left: 4px solid #2c3e50;
+        }
+        
+        .modern-significance {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .city-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .city-card {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            width: 30%;
+            min-width: 250px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #193048;
+            font-size: 1rem;
+            border-top: 1px solid rgba(25, 48, 72, 0.2);
+        }
+        
+        @media (max-width: 900px) {
+            .city-card {
+                width: 45%;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .content-box {
+                padding: 25px 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header-buttons {
+                width: 110px;
+                font-size: 14px;
+                margin: 0 5px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .main-content {
+                font-size: 1.1rem;
+            }
+            
+            .city-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav class="header-nav">
+            <a href="index.html" style="text-decoration: none;"><button class="header-buttons">Главная</button></a>
+            <a href="page3-history.html" style="text-decoration: none;"><button class="header-buttons">История</button></a>
+            <a href="page2-chrono.html" style="text-decoration: none;"><button class="header-buttons">Персоны</button></a>
+        </nav>
+    </div>
+    
+    <div class="container">
+        <div class="content-box">
+            <h1 class="animate__animated animate__fadeIn">Итоги атомного проекта</h1>
+            
+            <div class="main-content">
+                <h2>Урал – колыбель советского атомного проекта</h2>
+                <p>Советский атомный проект стал одним из самых масштабных научно-технических достижений XX века, а Урал сыграл в нём ключевую роль. Благодаря уникальному сочетанию факторов – развитой промышленности, удалённости от границ, водным ресурсам и трудовому потенциалу – именно здесь были созданы первые предприятия ядерного комплекса.</p>
+                
+                <div class="key-points">
+                    <h3>Главные итоги проекта:</h3>
+                    <ul>
+                        <li><strong>Прорыв в науке и технологиях</strong> – от фундаментальных исследований 1930-х до испытания РДС-1 в 1949 году.</li>
+                        <li><strong>Создание закрытых городов (ЗАТО)</strong> – Озёрск, Новоуральск, Снежинск, которые до сих пор остаются центрами атомной отрасли.</li>
+                        <li><strong>Геополитический переворот</strong> – СССР стал второй ядерной державой, что изменило баланс сил в мире.</li>
+                    </ul>
+                    
+                    <div class="city-list">
+                        <div class="city-card">
+                            <h4>Озёрск</h4>
+                            <p>(Челябинск-40)</p>
+                            <p>ПО "Маяк"</p>
+                        </div>
+                        <div class="city-card">
+                            <h4>Новоуральск</h4>
+                            <p>(Свердловск-44)</p>
+                            <p>Уральский электрохимический комбинат</p>
+                        </div>
+                        <div class="city-card">
+                            <h4>Снежинск</h4>
+                            <p>(Челябинск-70)</p>
+                            <p>Российский федеральный ядерный центр</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p>Однако за успехом стояли и трудные страницы истории: использование труда заключённых, экологические последствия (как на комбинате «Маяк»), а также начало гонки вооружений.</p>
+                
+                <div class="modern-significance">
+                    <h2>Современное значение</h2>
+                    <p>Сегодня уральские предприятия, такие как ПО «Маяк» и УЭХК, продолжают играть важную роль в российской атомной энергетике и оборонной промышленности.</p>
+                    <p>Атомный проект доказал: даже в сложнейших условиях концентрация научных, промышленных и человеческих ресурсов способна привести к технологическому прорыву.</p>
+                </div>
+                
+                <div class="conclusion">
+                    <p>Этот опыт остаётся актуальным и сегодня – как пример того, как регион может стать локомотивом национального развития.</p>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Персоны</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Основные стили остаются без изменений */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(218, 229, 230);
+            min-height: 100vh;
+            color: #E0E0E0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        p {
+            color: #325981;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .header {
+            width: 100%;
+            background: linear-gradient(90deg, #4a5568, #1a2b3c, #33475b);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .header-nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-buttons {
+            margin-right: 3%;
+            width: 130px;
+            height: 42px;
+            margin-left: 7px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 10px;
+            color: #193048;
+            transition: .2s linear;
+            background: #E0E0E0;
+        }
+        
+        .header-buttons:hover {
+            transform: rotateZ(7deg);
+        }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        h1, h2, h3, h5 {
+            color: #193048;
+        }
+        
+        .main {
+            margin-top: 0px;
+            width: 100%;
+            height: auto;
+        }
+        
+        .person-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 40px;
+        }
+        
+        .person-info {
+            flex: 1;
+            min-width: 500px;
+            text-align: left;
+            padding: 20px;
+        }
+        
+        .slider-wrapper {
+            flex: 1;
+            min-width: 500px;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .slider img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            display: block;
+        }
+
+        .prev-button,
+        .next-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: none;
+            border-radius: 50%;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .prev-button:hover,
+        .next-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            font-size: 35px;
+        }
+        
+        .prev-button {
+            left: 15px;
+        }
+
+        .next-button {
+            right: 15px;
+        }
+        
+        .Name {
+            color: #193048;
+            text-align: left;
+            margin-bottom: 20px;
+            
+        }
+        
+        .Name h1 {
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        /* Новые стили для форматирования текста */
+        .bio-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #d0e0f0;
+        }
+        
+        .bio-section h2 {
+            color: #1a4480;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #2c3e50;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #3498db;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+        
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #2980b9;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #2980b9;
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .achievement-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .achievement-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .achievement-list li::before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-size: 18px;
+        }
+        
+        .legacy-section {
+            
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .legacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .legacy-item {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .Main-text {
+            color: #193048;
+            margin-top: 50px;
+            padding: 30px;
+            
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .Main-text h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a4480;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2c3e50;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1100px) {
+            .person-info,
+            .slider-wrapper {
+                min-width: 100%;
+            }
+            
+            .slider-container {
+                max-width: 600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .person-info,
+            .slider-wrapper {
+                min-width: 100%;
+            }
+            
+            .slider-container {
+                max-width: 100%;
+            }
+            
+            .header-buttons {
+                width: 100px;
+                font-size: 14px;
+            }
+            
+            .Main-text {
+                padding: 15px;
+            }
+            
+            .timeline {
+                padding-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+  <div class="header">
+      <nav class="header-nav">
+        <a href="index.html" style="text-decoration: none;"><button class="header-buttons">Главная</button></a>
+        <a href="page3-history.html" style="text-decoration: none;"><button class="header-buttons">История</button></a>
+        <a href="page4-results.html" style="text-decoration: none;"><button class="header-buttons">Итоги</button></a>
+      </nav>
+  </div>
+  <div class="container">
+      <div class="content-box">
+          <h1>Персоны</h1>
+      </div>
+      <div class="main">
+        <div class="person-container">
+            <div class="person-info">
+                <div class="Name">
+                    <h1>И.В. Курчатов</h1>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-year">1903</span>
+                            Родился в посёлке Симский Завод Уфимской губернии в семье землемера и учительницы
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1934</span>
+                            Получил степень доктора физико-математических наук без защиты диссертации
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1941-1942</span>
+                            Разработал метод размагничивания кораблей, защитив флот от магнитных мин
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1942-1943</span>
+                            Стал научным руководителем атомного проекта и возглавил Лабораторию №2
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1954</span>
+                            Запущена первая в мире АЭС в Обнинске
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1960</span>
+                            Умер 7 февраля в Барвихе от сердечного приступа
+                        </div>
+                    </div>
+                </div>
+                <div class="Name hidden">
+                    <h1>Ю.Б. Харитон</h1>
+                    <div class="timeline">
+                        <div class="timeline-item"><span class="timeline-year">1904</span>Родился в Санкт-Петербурге в семье журналиста и актрисы МХАТа.</div>
+                        <div class="timeline-item"><span class="timeline-year">1939–1941</span>Совместно с Яковом Зельдовичем рассчитал цепную реакцию деления урана.</div>
+                        <div class="timeline-item"><span class="timeline-year">1946</span>Назначен главным конструктором КБ-11 (Арзамас-16).</div>
+                        <div class="timeline-item"><span class="timeline-year">1949</span>Успешное испытание первой советской атомной бомбы РДС-1.</div>
+                        <div class="timeline-item"><span class="timeline-year">1953</span>Создана термоядерная бомба РДС-6с.</div>
+                        <div class="timeline-item"><span class="timeline-year">1996</span>Умер в Сарове. Похоронен на Новодевичьем кладбище.</div>
+                    </div>
+                </div>
+                <div class="Name hidden">
+                    <h1>Я.Б. Зельдович</h1>
+                    <div class="timeline">
+                        <div class="timeline-item"><span class="timeline-year">1914</span>Родился в Минске в семье юриста и переводчицы.</div>
+                        <div class="timeline-item"><span class="timeline-year">1939–1941</span>Совместно с Юлием Харитоном рассчитал цепную реакцию деления урана.</div>
+                        <div class="timeline-item"><span class="timeline-year">1946</span>Привлечён в состав группы Курчатова.</div>
+                        <div class="timeline-item"><span class="timeline-year">1949</span>Участник создания первой советской атомной бомбы РДС-1.</div>
+                        <div class="timeline-item"><span class="timeline-year">1953</span>Разработка водородной бомбы РДС-6с.</div>
+                        <div class="timeline-item"><span class="timeline-year">1987</span>Умер в Москве. Похоронен на Новодевичьем кладбище.</div>
+                    </div>
+                </div>
+                <div class="Name hidden">
+                    <h1>Л.П. Берия</h1>
+                    <div class="timeline">
+                        <div class="timeline-item"><span class="timeline-year">1899</span>Родился в селе Мерхеули в бедной крестьянской семье.</div>
+                        <div class="timeline-item"><span class="timeline-year">1938</span>Назначен главой НКВД.</div>
+                        <div class="timeline-item"><span class="timeline-year">1941</span>Член Государственного комитета обороны.</div>
+                        <div class="timeline-item"><span class="timeline-year">1945</span>Руководитель атомного проекта.</div>
+                        <div class="timeline-item"><span class="timeline-year">1949</span>Успешное испытание первой советской атомной бомбы РДС-1.</div>
+                        <div class="timeline-item"><span class="timeline-year">1953</span>Арестован и расстрелян.</div>
+                    </div>
+                </div>
+                <div class="Name hidden">
+                    <h1>Б.Л. Ванников</h1>
+                    <div class="timeline">
+                        <div class="timeline-item"><span class="timeline-year">1897</span>Родился в Баку в семье рабочего-нефтяника.</div>
+                        <div class="timeline-item"><span class="timeline-year">1942</span>Получил звание Героя Социалистического Труда.</div>
+                        <div class="timeline-item"><span class="timeline-year">1945–1953</span>Руководитель Первого главного управления (ПГУ).</div>
+                        <div class="timeline-item"><span class="timeline-year">1949</span>Руководил испытанием РДС-1.</div>
+                        <div class="timeline-item"><span class="timeline-year">1954</span>Третья звезда Героя Социалистического Труда.</div>
+                        <div class="timeline-item"><span class="timeline-year">1962</span>Умер в Москве. Похоронен у Кремлёвской стены.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-wrapper">
+                <div class="slider-container">
+                    <div class="slider">
+                        <img src="templates/Курчатов.jpg" alt="И.В. Курчатов">
+                        <img src="templates/Харитон.jpg" alt="Ю.Б. Харитон">
+                        <img src="templates/Зельдович.jpg" alt="Я.Б. Зельдович">
+                        <img src="templates/Берия.jpg" alt="Л.П. Берия">
+                        <img src="templates/Ванников.jpg" alt="Б.Л. Ванников">
+                    </div>
+                    <button class="prev-button" aria-label="Посмотреть предыдущий слайд">&lt;</button>
+                    <button class="next-button" aria-label="Посмотреть следующий слайд">&gt;</button>
+                </div>
+            </div>
+        </div>
+        <div class="Main-text">
+            <h2>Подробная биография И.В. Курчатова</h2>
+            
+            <div class="bio-section">
+                <h2>Ранние годы и образование</h2>
+                <p>Родился 12 января 1903 года (по новому стилю) в посёлке Симский Завод Уфимской губернии (ныне город Сим, Челябинская область) в семье землемера и учительницы.</p>
+                <p>Его семья переехала в Симбирск (1908), затем в Симферополь (1912), где Игорь окончил гимназию с золотой медалью, параллельно работая слесарем на заводе.</p>
+                <p>В 1923 году досрочно окончил Таврический университет (физико-математический факультет), затем учился в Петроградском политехническом институте (кораблестроительный факультет).</p>
+            </div>
+            
+            <div class="bio-section">
+                <h2>Начало научной карьеры</h2>
+                <p>В 1925 году стал сотрудником Ленинградского физико-технического института (ЛФТИ) под руководством академика Абрама Иоффе. Изучал диэлектрики и полупроводники, в 1933 году открыл явление сегнетоэлектричества.</p>
+                <p>Позже он переключился на ядерную физику. В 1937 году участвовал в создании первого в Европе циклотрона и исследовал деление ядер урана.</p>
+            </div>
+            
+            <div class="bio-section">
+                <h2>Великая Отечественная война и начало атомного проекта</h2>
+                <ul class="achievement-list">
+                    <li>В 1941-1942 годы разработал метод размагничивания кораблей, защитив флот от магнитных мин.</li>
+                    <li>В 1942 году после получения разведданных о ядерных программах США и Германии Сталин подписал постановление о начале атомного проекта.</li>
+                    <li>В 1943 году возглавил Лабораторию №2, координируя все исследования по созданию атомной бомбы.</li>
+                </ul>
+            </div>
+            
+            <div class="bio-section">
+                <h2>Атомный проект и создание ядерного оружия</h2>
+                <ul class="achievement-list">
+                    <li>В 1946 году под его руководством запущен первый в Евразии ядерный реактор (Ф-1 в Москве).</li>
+                    <li>В 1949 году 29 августа успешно была испытана первая советская атомная бомба РДС-1 (Семипалатинский полигон). За это Курчатов получил звание Героя Социалистического Труда.</li>
+                    <li>В 1953 году была создана первая в мире водородная бомба (РДС-6с).</li>
+                    <li>Позже, в 1961 году, под его научным руководством была разработана "Царь-бомба".</li>
+                </ul>
+            </div>
+            
+            <div class="bio-section">
+                <h2>Мирный атом и поздние годы</h2>
+                <ul class="achievement-list">
+                    <li>В 1954 году была запущена первая в мире АЭС в Обнинске.</li>
+                    <li>1950-е года: Работал над атомными ледоколами и подводными лодками с ядерными реакторами.</li>
+                    <li>Выступление за мир: В 1958 году призвал ученых мира запретить ядерное оружие и использовать атомную энергию в мирных целях.</li>
+                </ul>
+            </div>
+            
+            <div class="legacy-section">
+                <h2>Наследие</h2>
+                <div class="legacy-grid">
+                    <div class="legacy-item">
+                        <h3>Институты</h3>
+                        <p>Курчатовский институт (Москва)</p>
+                    </div>
+                    <div class="legacy-item">
+                        <h3>Города</h3>
+                        <p>Курчатов (Курская область)<br>Курчатово (Казахстан)</p>
+                    </div>
+                    <div class="legacy-item">
+                        <h3>Памятники</h3>
+                        <p>Симферополь, Озёрск, Челябинск</p>
+                    </div>
+                    <div class="legacy-item">
+                        <h3>Космос</h3>
+                        <p>Кратер на Луне</p>
+                    </div>
+                    <div class="legacy-item">
+                        <h3>Кино</h3>
+                        <p>"Выбор цели" (1974)<br>Сергей Бондарчук</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Main-text hidden">
+            <h2>Подробная биография Ю.Б. Харитон</h2>
+                                <div class="bio-section">
+                        <h2>Ранние годы и образование</h2>
+                        <p>Родился в Петербурге в семье интеллигентов: отец — редактор кадетской газеты «Речь», мать — актриса. После развода родителей воспитывался отцом.</p>
+                        <p>В 1919 году окончил реальное училище, работал механиком на телеграфе, затем поступил в Петроградский политехнический институт. Увлёкся физикой на лекциях Абрама Иоффе, перешёл на физико-механический факультет.</p>
+                        <p>В 1926–1928 годах стажировался в Кавендишской лаборатории (Кембридж) под руководством Эрнеста Резерфорда, где защитил диссертацию по регистрации альфа-частиц.</p>
+                    </div>
+                    <div class="bio-section">
+                        <h2>Начало научной карьеры</h2>
+                        <ul class="achievement-list">
+                            <li>1931–1946: Возглавил лабораторию взрывчатых веществ в Институте химической физики, основал школу физики взрыва.</li>
+                            <li>1939 год: Совместно с Зельдовичем опубликовал работу о цепной реакции деления урана, доказав необходимость обогащения урана-235 для создания бомбы.</li>
+                            <li>1940 год: Вошёл в Урановую комиссию АН СССР, сотрудничал с Курчатовым.</li>
+                        </ul>
+                    </div>
+                    <div class="bio-section">
+                        <h2>Атомный проект и создание ядерного оружия</h2>
+                        <ul class="achievement-list">
+                            <li>1946 год: Назначен научным руководителем КБ-11 (Саров).</li>
+                            <li>1949 год: Под его руководством успешно испытана первая советская атомная бомба РДС-1.</li>
+                            <li>1953 год: Создание водородной бомбы РДС-6с.</li>
+                            <li>1950–1980-е годы: Руководил модернизацией ядерных зарядов, сокращая их вес и увеличивая мощность.</li>
+                        </ul>
+                    </div>
+                    <div class="legacy-section">
+                        <h2>Наследие</h2>
+                        <div class="legacy-grid">
+                            <div class="legacy-item"><h3>Награды</h3><p>Трижды Герой Социалистического Труда<br>Ленинская и три Сталинские премии</p></div>
+                            <div class="legacy-item"><h3>Памятники</h3><p>Мемориальные доски в Москве и Петербурге</p></div>
+                            <div class="legacy-item"><h3>Улицы</h3><p>в Сарове, Санкт-Петербурге, Троицке</p></div>
+                            <div class="legacy-item"><h3>Астероид</h3><p>(9263) Харитон</p></div>
+                            <div class="legacy-item"><h3>Кино</h3><p>«Атомная бомба. Личное дело человека Икс» (2024)</p></div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        <div class="Main-text hidden">
+            <h2>Подробная биография Я.Б. Зельдович</h2>
+            <div class="bio-section">
+                        <h2>Ранние годы и образование</h2>
+                        <p>Родился в еврейской семье: отец — присяжный поверенный, мать — выпускница Сорбонны. После начала Первой мировой войны семья переехала в Петроград.</p>
+                        <p>В 1930 году окончил школу и начал работать лаборантом в Институте механической обработки полезных ископаемых. Без формального диплома в 1934 году поступил в аспирантуру Института химической физики.</p>
+                        <p>В 1936 году защитил кандидатскую диссертацию по адсорбции, а в 1939 году — докторскую по окислению азота, став самым молодым доктором наук в СССР (25 лет).</p>
+                    </div>
+                    <div class="bio-section">
+                        <h2>Начало научной карьеры</h2>
+                        <ul class="achievement-list">
+                            <li>1938–1941: Возглавил лабораторию в ИХФ, разработав теорию горения и детонации.</li>
+                            <li>1939–1941: Опубликовал работы по цепной реакции деления урана.</li>
+                            <li>1941–1943: В эвакуации в Казани совершенствовал пороха для реактивных снарядов.</li>
+                        </ul>
+                    </div>
+                    <div class="bio-section">
+                        <h2>Астрофизика и космология</h2>
+                        <ul class="achievement-list">
+                            <li>Разработал теорию чёрных дыр и предсказал их излучение.</li>
+                            <li>Совместно с Рашидом Сюняевым описал эффект рассеяния реликтового излучения.</li>
+                            <li>Автор теории формирования крупномасштабной структуры Вселенной.</li>
+                        </ul>
+                    </div>
+                    <div class="legacy-section">
+                        <h2>Наследие</h2>
+                        <div class="legacy-grid">
+                            <div class="legacy-item"><h3>Награды</h3><p>Трижды Герой Социалистического Труда<br>Четыре Сталинские премии</p></div>
+                            <div class="legacy-item"><h3>Памятники</h3><p>Бронзовый бюст в Минске</p></div>
+                            <div class="legacy-item"><h3>Улицы</h3><p>в Москве и Минске</p></div>
+                            <div class="legacy-item"><h3>Книги</h3><p>«Высшая математика для начинающих»</p></div>
+                        </div>
+                    </div>
+                
+        </div>
+        <div class="Main-text hidden">
+            <h2>Подробная биография Л.П. Берия</h2>
+            <div class="bio-section">
+                        <h2>Ранние годы и образование</h2>
+                        <p>Родился в крестьянской семье. Продал половину дома, чтобы оплатить обучение в техническом училище. Вступил в партию в 1917 году, участвовал в подпольной работе.</p>
+                    </div>
+                    <div class="bio-section">
+                        <h2>Карьера в органах госбезопасности</h2>
+                        <ul class="achievement-list">
+                            <li>1920–1931: Прошёл путь от управляющего до председателя ГПУ Грузии.</li>
+                            <li>1931–1938: Первый секретарь ЦК КП Грузии.</li>
+                            <li>1938: Назначен главой НКВД.</li>
+                        </ul>
+                    </div>
+                    <div class="bio-section">
+                        <h2>Роль в Великой Отечественной войне</h2>
+                        <ul class="achievement-list">
+                            <li>Организовал эвакуацию заводов и производство вооружений.</li>
+                            <li>Депортация народов (чеченцев, крымских татар).</li>
+                            <li>В 1945 получил звание маршала.</li>
+                        </ul>
+                    </div>
+                    <div class="legacy-section">
+                        <h2>Наследие</h2>
+                        <div class="legacy-grid">
+                            <div class="legacy-item"><h3>Награды</h3><p>Герой Социалистического Труда</p></div>
+                            <div class="legacy-item"><h3>Кино</h3><p>Образ в фильмах: «Смерть Сталина», «Бомба»</p></div>
+                            <div class="legacy-item"><h3>Память</h3><p>Не реабилитирован. Споры вокруг роли в истории.</p></div>
+                        </div>
+                        </div>
+        </div>
+        <div class="Main-text hidden">
+            <h2>Подробная биография Б.Л. Ванников</h2>
+                                <div class="bio-section">
+                        <h2>Ранние годы и образование</h2>
+                        <p>Работал слесарем и токарем, параллельно учился в политехническом училище. В 1926 году окончил Московское высшее техническое училище.</p>
+                    </div>
+                    <div class="bio-section">
+                        <h2>Начало карьеры в промышленности</h2>
+                        <ul class="achievement-list">
+                            <li>1926–1933: Директор Люберецкого завода.</li>
+                            <li>1936–1939: Заместитель наркома оборонной промышленности.</li>
+                        </ul>
+                    </div>
+                    <div class="bio-section">
+                        <h2>Атомный проект</h2>
+                        <ul class="achievement-list">
+                            <li>1945: Назначен начальником ПГУ.</li>
+                            <li>1949: Руководил испытанием РДС-1.</li>
+                            <li>1953: Участвовал в создании РДС-6с.</li>
+                        </ul>
+                    </div>
+                    <div class="legacy-section">
+                        <h2>Наследие</h2>
+                        <div class="legacy-grid">
+                            <div class="legacy-item"><h3>Памятники</h3><p>Памятник в МИФИ (2024)</p></div>
+                            <div class="legacy-item"><h3>Улицы</h3><p>в Туле, Челябинске, Сарове</p></div>
+                            <div class="legacy-item"><h3>Кино</h3><p>Документальный фильм «Ядерный нарком» (2020)</p></div>
+                        </div>
+                    </div>
+        </div>
+      </div>
+  </div>
+<script>
+    
+const slider = document.querySelector('.slider');
+const prevButton = document.querySelector('.prev-button');
+const nextButton = document.querySelector('.next-button');
+const slides = Array.from(slider.querySelectorAll('img'));
+const names = Array.from(document.querySelectorAll('.Name'));
+const slideCount = slides.length;
+const mains = Array.from(document.querySelectorAll('.Main-text'));
+let slideIndex = 0;
+let nameIndex = 0;
+let mainIndex = 0;
+
+
+// Устанавливаем обработчики событий для кнопок
+prevButton.addEventListener('click', showPreviousSlide);
+nextButton.addEventListener('click', showNextSlide);
+
+// Функция для показа предыдущего слайда
+function showPreviousSlide() {
+  slideIndex = (slideIndex - 1 + slideCount) % slideCount;
+  updateSlider();
+  updateSliderName();
+  updateSliderMain();
+}
+
+// Функция для показа следующего слайда
+function showNextSlide() {
+  slideIndex = (slideIndex + 1) % slideCount;
+  updateSlider();
+  updateSliderName();
+  updateSliderMain();
+}
+
+// Функция для обновления отображения слайдера
+function updateSlider() {
+  slides.forEach((slide, index) => {
+    if (index === slideIndex ) {
+      slide.style.display = 'block';
+
+
+    } else {
+      slide.style.display = 'none';
+    }
+  });
+}
+function updateSliderName() {
+  names.forEach((name, index) => {
+    if (index === slideIndex ) {
+      name.style.display = 'block';
+
+    } else {
+      name.style.display = 'none';
+    }
+  });
+}
+function updateSliderMain() {
+  mains.forEach((main, index) => {
+    if (index === slideIndex ) {
+      main.style.display = 'block';
+
+    } else {
+      main.style.display = 'none';
+    }
+  });
+}
+
+// Инициализация слайдера
+updateSlider();
+updateSliderName();
+</script>

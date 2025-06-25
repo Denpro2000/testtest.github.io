@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Атомный проект на Урале</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Основные стили */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(218, 229, 230);
+            min-height: 100vh;
+            color: #E0E0E0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: darkgreen;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        p {
+            color: #325981;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+        }
+
+        .header {
+            width: 100%;
+            background: linear-gradient(90deg, #4a5568, #1a2b3c, #33475b);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .header-nav {
+            display: flex;
+            align-items: center;
+        }
+        .header-buttons {
+            margin-right: 3%;
+            width: 130px;
+            height: 42px;
+            margin-left: 7px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 10px;
+            color: #193048;
+            transition: .2s linear;
+            background: #E0E0E0;
+        }
+        .header-buttons:hover {
+            -webkit-transform: rotateZ(7deg);
+            -ms-transform: rotateZ(7deg);
+            transform: rotateZ(7deg);
+        }
+        
+        .main {
+            width: 100%;
+            height: auto;
+        }
+        
+        .text1 {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            height: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .flex {
+            margin-top: 50px;
+            width: 100%;
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        /* Стили для адаптивных квадратных изображений */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            flex: 0 0 auto;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .block {
+            opacity: 0;
+        }
+        
+        .block.animated {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Адаптивные стили */
+        /* Для больших экранов */
+        @media (min-width: 1201px) {
+            .text1 {
+                width: calc(60% - 30px);
+                max-width: 800px;
+            }
+            .image-container {
+                width: 500px;
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .flex {
+                gap: 40px;
+            }
+            .text1 {
+                width: calc(60% - 20px);
+                max-width: 700px;
+            }
+            .image-container {
+                width: 450px;
+                height: 450px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .flex {
+                gap: 30px;
+            }
+            .text1 {
+                width: calc(60% - 15px);
+                max-width: 600px;
+            }
+            .image-container {
+                width: 400px;
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .flex {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .text1, .image-container {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .image-container {
+                height: 80vw;
+                max-height: 500px;
+            }
+            
+            .text1 {
+                height: auto;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 20px 10px;
+            }
+            
+            .content-box {
+                padding: 15px;
+            }
+        }
+        
+        /* Стили для карточек */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        h1, h2, h5 {
+            color: #193048;
+        }
+        
+        .section-dark {
+            background-color: rgb(218, 229, 230);
+            color: #fff;
+            margin-top: 100px;
+        }
+        
+        .card-light {
+            text-decoration: none;
+            background-color: #f8f9fa;
+            color: #212529;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Стили для теста */
+        .test-section {
+            background: linear-gradient(135deg, #1a2b3c, #33475b);
+            padding: 50px 20px;
+            margin-top: 80px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .test-header {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .test-subtitle {
+            color: #c0d6e4;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        
+        .question-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: left;
+        }
+        
+        .question-text {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .option {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .option.selected {
+            background: #5f9ea0;
+            border: 2px solid black;
+        }
+        
+        /* УДАЛЕНЫ СТИЛИ ДЛЯ INPUT */
+        .option label {
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.1rem;
+            flex-grow: 1;
+        }
+        
+        .test-controls {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .test-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .test-btn:hover {
+            background: #5f9ea0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .test-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .result-title {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #BACBDB;
+            margin: 20px 0;
+            
+        }
+        
+        .feedback {
+            color: #c0d6e4;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .restart-btn {
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 25px;
+        }
+        
+        .restart-btn:hover {
+            background: #5c7cfa;
+        }
+        
+        .question-counter {
+            color: #c0d6e4;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+        .right{
+            background: green;
+        }
+        .wrong{
+            background: red;
+        }
+        /* Адаптация теста для мобильных */
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-header {
+                font-size: 1.8rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .option label {
+                font-size: 1rem;
+            }
+            
+            .test-controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .test-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+  <div class="header">
+      <nav class="header-nav">
+    <a href="page3-history.html" style="text-decoration: none;"><button  class="header-buttons">История</button></a>
+    <a href="page2-chrono.html" style="text-decoration: none;"><button  class="header-buttons">Персоны</button></a>
+    <a href="page4-results.html" style="text-decoration: none;"><button  class="header-buttons">Итоги</button></a>
+  </nav>
+  </div>
+  <div class="container">
+      <div class="content-box">
+          <h1>Атомный проект на Урале/СССР</h1>
+      </div>
+      <div class="main">
+          <div class="flex">
+              <div class="text1 block">
+                  <h1>Ядерный щит Урала: Сохраняя историю атомного проекта</h1><br>
+                  <p>
+                  Наш сайт — это образовательный и информационный ресурс, посвященный ключевой роли Урала в создании ядерного щита России. Здесь вы найдете структурированные данные, редкие архивные материалы и интерактивные экспозиции, помогающие сохранить историческую память об одном из важнейших проектов XX века.
+                  </p>
+              </div>
+              <div class="image-container block">
+                  <img src="templates/photo_2025-05-26_20-49-02.jpg">
+              </div>
+          </div>
+          
+          <div class="flex block">
+              <div class="image-container block">
+                  <img src="templates/PeByV5BbZkiQca8Qib4x1.jpg">
+              </div>
+              <div class="text1 block">
+                  <h1>Задачи нашего сайта</h1><br>
+                  <p>Сайт служит источником информации одного из важнейших проектов XX века. На сайте предоставлено много информации к легкому изучению. Мы хотим сохранить память о Урале и великом атомном проекте.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <section class="section-dark">
+    <div class="container">
+      <h2 class="text-center block">Ключевые разделы сайта</h2>
+      <p class="text-center block">Наш ресурс предоставляет всесторонний взгляд на атомный проект — от его истоков до современных аспектов.</p>
+      <div class="flex" style="justify-content: center; margin-top: 30px;">
+        <div class="block" style="flex: 1; min-width: 250px; max-width: 300px; margin: 10px;">
+          <a href="page3-history.html" style="text-decoration: none;">
+          <div class="card-light">
+            <h5>История</h5>
+            <p>Описание этапов развития проекта и уникальной роли Урала в создании.</p>
+          </div>
+          </a>
+        </div>
+        
+        <div class="block" style="flex: 1; min-width: 250px; max-width: 300px; margin: 10px;">
+          <a href="page2-chrono.html" style="text-decoration: none;">
+          <div class="card-light">
+            <h5>Персоны</h5>
+            <p>Биографии выдающихся учёных и инженеров, таких как Курчатов, Харитон, Зернов.</p>
+          </div>
+          </a>
+        </div>
+        
+        <div class="block" style="flex: 1; min-width: 250px; max-width: 300px; margin: 10px;">
+          <a href="page4-results.html" style="text-decoration: none;">
+          <div class="card-light">
+            <h5>Итоги</h5>
+            <p>Интерактивная временная шкала ключевых событий с 1940-х по 1950-е годы.</p>
+          </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Тест по истории атомного проекта -->
+  <div class="container">
+      <div class="test-section block">
+          <h2 class="test-header">Тест: Атомный проект на Урале</h2>
+          <p class="test-subtitle">Проверьте свои знания об истории создания ядерного щита России и ключевой роли Урала в атомном проекте СССР</p>
+          
+          <div class="question-counter" id="questionCounter">Вопрос 1 из 10</div>
+          
+          <div id="testContent">
+              <!-- Вопросы будут добавляться динамически -->
+          </div>
+          
+          <div class="test-controls">
+              <button id="prevBtn" class="test-btn" disabled>
+                  <i class="fas fa-arrow-left"></i> Назад
+              </button>
+              <button id="nextBtn" class="test-btn">
+                  Далее <i class="fas fa-arrow-right"></i>
+              </button>
+              <button id="submitBtn" class="test-btn" style="display: none;">
+                  <i class="fas fa-check-circle"></i> Завершить тест
+              </button>
+          </div>
+          
+          <div class="result-container" id="resultContainer">
+              <h3 class="result-title">Ваш результат</h3>
+              <div class="score" id="scoreResult">0/10</div>
+              <p class="feedback" id="testFeedback"></p>
+              <button id="restartBtn" class="test-btn restart-btn">
+                  <i class="fas fa-redo"></i> Пройти тест снова
+              </button>
+          </div>
+      </div>
+  </div>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('animated');
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+      });
+  
+      document.querySelectorAll('.block').forEach(block => {
+          observer.observe(block);
+      });
+      
+      // Тест по истории атомного проекта
+      const questions = [
+          {
+              question: "Когда и почему в СССР начались активные исследования в области ядерной физики?",
+              options: [
+                  "В 1950-х годах, после испытания первой американской атомной бомбы",
+                  "В 1917 году, сразу после революции",
+                  "В 1920-1930-х годах, с изучения радиоактивности, деления урана и цепных реакций",
+                  "В 1945 году, после окончания Второй мировой войны"
+              ],
+              correct: 2
+          },
+          {
+              question: "Какие три ключевых научных центра участвовали в ранних этапах атомного проекта?",
+              options: [
+                  "МГУ, СПбГУ и Казгу",
+                  "Радиевый институт (Хлопин), Ленинградский Физтех (Курчатов), Харьковский Физтех (Зельдович, Харитон)",
+                  "Институт ядерных исследований в Дубне, Курчатовский институт, Обнинская АЭС",
+                  "Сколково, НИЦ «Курчатовский институт», Росатом"
+              ],
+              correct: 1
+          },
+          {
+              question: "Почему Урал был выбран основным регионом для размещения атомных объектов?",
+              options: [
+                  "Близость к Москве и Ленинграду",
+                  "Наличие крупных месторождений урана",
+                  "Удаленность от границ, развитая инфраструктура, водные ресурсы, трудовые резервы",
+                  "Мягкий климат и плодородные почвы"
+              ],
+              correct: 2
+          },
+          {
+              question: "Какую роль сыграл Л.П. Берия в атомном проекте?",
+              options: [
+                  "Лично проводил ядерные эксперименты",
+                  "Был научным руководителем проекта",
+                  "Координация всех этапов через Специальный комитет, мобилизация ресурсов, контроль за исполнением",
+                  "Разрабатывал теоретические основы цепной реакции"
+              ],
+              correct: 2
+          },
+          {
+              question: "Каковы были ключевые этапы создания первой советской атомной бомбы с 1945 по 1949 год?",
+              options: [
+                  "Создание термоядерной бомбы, запуск первой АЭС",
+                  "Строительство реакторов, запуск «Аннушки» в 1948, наработка плутония, испытание РДС-1 (29.08.1949)",
+                  "Разработка ядерного реактора для подводных лодок",
+                  "Открытие явления радиоактивности"
+              ],
+              correct: 1
+          },
+          {
+              question: "Кто из учёных внёс наибольший вклад в теоретические расчёты цепной реакции?",
+              options: [
+                  "П.Л. Капица и Л.Д. Ландау",
+                  "Я.Б. Зельдович и Ю.Б. Харитон - работы 1939-1941 гг.",
+                  "А.Д. Сахаров и И.Е. Тамм",
+                  "Н. Бор и Э. Резерфорд"
+              ],
+              correct: 1
+          },
+          {
+              question: "Каковы были социальные последствия атомного проекта для Урала?",
+              options: [
+                  "Массовое переселение жителей в другие регионы",
+                  "Создание ЗАТО, использование труда заключённых, формирование научных центров",
+                  "Полное исчезновение местной культуры",
+                  "Развитие сельского хозяйства в регионе"
+              ],
+              correct: 1
+          },
+          {
+              question: "Почему испытание РДС-1 в 1949 году изменило геополитическую ситуацию?",
+              options: [
+                  "СССР отказался от дальнейших ядерных разработок",
+                  "США сразу прекратили свою ядерную программу",
+                  "СССР стал второй ядерной державой, что уравняло позиции с США в Холодной войне",
+                  "Начался процесс ядерного разоружения"
+              ],
+              correct: 2
+          },
+          {
+              question: "Как И.В. Курчатов совмещал военные и мирные аспекты ядерных исследований?",
+              options: [
+                  "Полностью сосредоточился на военных разработках",
+                  "После создания бомбы развивал атомную энергетику: первая АЭС в Обнинске, ледокол «Ленин»",
+                  "Переключился исключительно на фундаментальную науку",
+                  "Уехал работать за границу"
+              ],
+              correct: 1
+          },
+          {
+              question: "Какие экологические проблемы возникли из-за уральских атомных объектов?",
+              options: [
+                  "Глобальное потепление",
+                  "Кыштымская авария 1957 года на комбинате «Маяк», радиоактивное загрязнение территории",
+                  "Исчезновение озонового слоя",
+                  "Массовое вымирание видов животных"
+              ],
+              correct: 1
+          }
+      ];
+      
+      let currentQuestion = 0;
+      let userAnswers = new Array(questions.length).fill(null);
+      let showAnswersMode = false;
+      const testContent = document.getElementById('testContent');
+      const questionCounter = document.getElementById('questionCounter');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      const resultContainer = document.getElementById('resultContainer');
+      const scoreResult = document.getElementById('scoreResult');
+      const testFeedback = document.getElementById('testFeedback');
+      const restartBtn = document.getElementById('restartBtn');
+      
+      function renderQuestion() {
+          const q = questions[currentQuestion];
+          questionCounter.textContent = `Вопрос ${currentQuestion + 1} из ${questions.length}`;
+          
+          let optionsHTML = '';
+          q.options.forEach((option, index) => {
+              const isSelected = userAnswers[currentQuestion] === index;
+              let optionClass = 'option';
+              
+              if (showAnswersMode) {
+                  if (index === q.correct) {
+                      optionClass += ' right';
+                  } else if (isSelected && index !== q.correct) {
+                      optionClass += ' wrong';
+                  }
+              } else if (isSelected) {
+                  optionClass += ' selected';
+              }
+              
+              optionsHTML += `
+                  <div class="${optionClass}" data-index="${index}">
+                      <label>${option}</label>
+                  </div>
+              `;
+          });
+          
+          testContent.innerHTML = `
+              <div class="question-container">
+                  <div class="question-text">${q.question}</div>
+                  <div class="options-container">
+                      ${optionsHTML}
+                  </div>
+              </div>
+          `;
+          
+          // Добавляем обработчики выбора только если не в режиме показа ответов
+          if (!showAnswersMode) {
+              document.querySelectorAll('.option').forEach(option => {
+                  option.addEventListener('click', function() {
+                      const selectedIndex = parseInt(this.getAttribute('data-index'));
+                      userAnswers[currentQuestion] = selectedIndex;
+                      
+                      // Снимаем выделение со всех вариантов
+                      document.querySelectorAll('.option').forEach(opt => {
+                          opt.classList.remove('selected');
+                      });
+                      
+                      // Выделяем выбранный вариант
+                      this.classList.add('selected');
+                      
+                      // Обновляем кнопки
+                      updateButtons();
+                  });
+              });
+          }
+          
+          // Обновляем состояние кнопок
+          updateButtons();
+      }
+      
+      function updateButtons() {
+          // Кнопка "Назад"
+          prevBtn.disabled = currentQuestion === 0;
+          
+          // Кнопка "Далее"
+          if (currentQuestion === questions.length - 1) {
+              nextBtn.style.display = 'none';
+              submitBtn.style.display = 'block';
+              submitBtn.disabled = userAnswers[currentQuestion] === null;
+          } else {
+              nextBtn.style.display = 'block';
+              submitBtn.style.display = 'none';
+              nextBtn.disabled = userAnswers[currentQuestion] === null;
+          }
+      }
+      
+      function showResults() {
+          let correctCount = 0;
+          
+          userAnswers.forEach((answer, index) => {
+              if (answer === questions[index].correct) {
+                  correctCount++;
+              }
+          });
+          
+          const percentage = Math.round((correctCount / questions.length) * 100);
+          scoreResult.textContent = `${correctCount}/${questions.length}`;
+          
+          let feedback = '';
+          if (percentage >= 90) {
+              feedback = "Отличный результат! Вы прекрасно разбираетесь в истории атомного проекта на Урале.";
+          } else if (percentage >= 70) {
+              feedback = "Хороший результат! Вы хорошо знаете историю атомного проекта на Урале.";
+          } else if (percentage >= 50) {
+              feedback = "Удовлетворительный результат. Вы знаете основные факты об атомном проекте.";
+          } else {
+              feedback = "Попробуйте изучить материалы нашего сайта и пройти тест снова.";
+          }
+          
+          testFeedback.textContent = feedback;
+          resultContainer.style.display = 'block';
+          
+          // Прокручиваем к результатам
+          resultContainer.scrollIntoView({ behavior: 'smooth' });
+      }
+      
+      // Обработчики событий
+      prevBtn.addEventListener('click', function() {
+          if (currentQuestion > 0) {
+              currentQuestion--;
+              renderQuestion();
+          }
+      });
+      
+      nextBtn.addEventListener('click', function() {
+          if (currentQuestion < questions.length - 1) {
+              currentQuestion++;
+              renderQuestion();
+          }
+      });
+      
+      submitBtn.addEventListener('click', function() {
+          showAnswersMode = true;
+          renderQuestion();
+          showResults();
+      });
+      
+      restartBtn.addEventListener('click', function() {
+          currentQuestion = 0;
+          userAnswers.fill(null);
+          showAnswersMode = false;
+          resultContainer.style.display = 'none';
+          renderQuestion();
+      });
+      
+      // Инициализация теста
+      renderQuestion();
+  });
+  </script>
+</body>
+</html>

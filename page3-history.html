@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Атомный проект на Урале</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Основные стили */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(218, 229, 230);
+            min-height: 100vh;
+            color: #E0E0E0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .header {
+            width: 100%;
+            background: linear-gradient(90deg, #4a5568, #1a2b3c, #33475b);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .header-nav {
+            display: flex;
+            align-items: center;
+        }
+        .header-buttons {
+            margin-right: 3%;
+            width: 130px;
+            height: 42px;
+            margin-left: 7px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 10px;
+            color: #193048;
+            transition: .2s linear;
+            background: #E0E0E0;
+        }
+        .header-buttons:hover {
+            -webkit-transform: rotateZ(7deg);
+            -ms-transform: rotateZ(7deg);
+            transform: rotateZ(7deg);
+        }
+        h1, h2, h5 {
+            color: #193048;
+        }
+        .main {
+            width: 100%;
+            height: auto;
+        }
+        .slider-section{
+            display: flex;
+            align-items: flex-start;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .slider {
+            position: relative;
+            justify-content: left;
+            width: 100%;
+            height: 82px;
+            background: linear-gradient(90deg, #4a5568, #1a2b3c, #33475b);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            flex-shrink: 0;
+        }
+
+        .years {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            right: 20px;
+            margin-right: 25px;
+            margin-left: 25px;;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .year {
+            font-size: 25px;
+            color: black;
+            cursor: pointer;
+            user-select: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .year:hover {
+            background-color: grey;
+        }
+
+        .draggable-block{
+            position: absolute;
+            width: 125px;
+            height: 70px;
+            background-color: transparent;
+            box-shadow: inset 0 0 0 4px #E8E1DB;
+            border-radius: 40px; 
+            top: 6px;
+            cursor: grab;
+            transition: all 0.5s ease;
+            z-index: 1;
+        }
+
+
+        
+        .event-content {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            color: #193048;
+            text-align: left;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .text h3 {
+            margin-top: 0;
+            border-bottom: 2px solid #193048;
+            padding-bottom: 10px;
+        }
+       
+        .flex {
+            margin-top: 50px;
+            width: 100%;
+            height: 700px;
+            display: flex;
+            gap: 5%;
+            align-items: center;
+            flex-wrap: wrap;
+             /* Центрируем содержимое */
+        }
+        .text{
+            color: #193048;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 55%;
+            height: 100%;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        .photo{
+            background-color: aqua;
+            width: 40%;
+            height: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        img{
+            min-width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            min-height: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        li{
+        font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+  <div class="header">
+      <nav class="header-nav">
+        <a href="index.html" style="text-decoration: none;"><button class="header-buttons">Главная</button></a>
+        <a href="page2-chrono.html" style="text-decoration: none;"><button class="header-buttons">Персоны</button></a>
+        <a href="page4-results.html" style="text-decoration: none;"><button class="header-buttons">Итоги</button></a>
+      </nav>
+  </div>
+  <div class="container">
+      <div class="content-box">
+          <h1>История атомного проекта на Урале</h1>
+      </div>
+      <div class="main">
+        <div class="flex">
+            <div class="text" id="eventContent">
+                <h3>1945 год</h3>
+            <p>Начало работ по созданию первого советского атомного реактора. Создание Специального комитета для руководства атомным проектом под председательством Л.П. Берии.</p>
+            </div>
+            <div class="photo" id="eventPhoto">
+                <img src="PeByV5BbZkiQca8Qib4x1.jpg">
+            </div>
+        </div>
+        <div class="slider-section">
+            <div class="slider">
+                <div class="years">
+                    <button class="year active" data-index="0">1920-е</button>
+                    <button class="year" data-index="1">1930-е</button>
+                    <button class="year" data-index="2">1940-е</button>
+                    <button class="year" data-index="3">1950-е</button>
+                    <button class="year" data-index="3">1960-е</button>
+                </div>
+                <div class="draggable-block"></div>
+            </div>
+        </div>
+        
+        
+      </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const years = document.querySelectorAll('.year');
+        const draggableBlock = document.querySelector('.draggable-block');
+        const eventContent = document.getElementById('eventContent');
+        const eventPhoto = document.getElementById("eventPhoto");
+        const slider = document.querySelector('.slider');
+        const yearsContainer = document.querySelector('.years');
+        
+        // Исторические события
+const events = [
+    {
+        year: "1920-е годы",
+        photo: "templates/photo_2025-06-25_23-53-47.jpg",
+        content: `
+            <h3>1920-е годы</h3>
+            <p>Начало ядерных исследований в СССР:</p>
+            <ul>
+                <li>Советские физики изучают радиоактивность и строение атома</li>
+                <li>Закладываются основы будущих атомных исследований</li>
+                <li>Создаются первые научные школы в области ядерной физики</li>
+            </ul><br>
+            <p>Советские ученые, вдохновленные открытиями Резерфорда, Кюри и Бора, исследовали свойства радиоактивных элементов. В Ленинграде, Москве и Харькове создавались лаборатории, где изучали:<p>
+            <ul>
+                <li>Распад атомных ядер</li>
+                <li>Природу альфа-, бета- и гамма-излучений</li>
+                <li>Возможности использования радиоактивности в медицине и промышленности</li> 
+            </ul>
+        `
+    },
+    {
+        year: "1930-е годы",
+        photo: "templates/photo_2025-06-25_23-55-30.jpg",
+        content: `
+            <h3>1930-е годы</h3>
+            <h4>Ключевые достижения</h4>
+            <ul>
+                <li><strong>1932</strong> — В Ленинградском Физтехе запущен первый в Европе циклотрон</li>
+                <p>Циклотрон (установка для разгона частиц) позволил проводить эксперименты с искусственной радиоактивностью.<br>
+  СССР вышел на уровень ведущих мировых лабораторий</p>
+                <li><strong>1938–1939</strong> — Открытие деления урана (Ган и Штрассман)</li>
+                <p>Юлий Харитон и Яков Зельдович опубликовали работу «О цепном распаде урана»</p>
+                <li><strong>1939</strong> — Советские учёные (Зельдович, Харитон) начинают теоретические расчёты цепной реакции</li>
+            </ul>
+        `
+    },
+    {
+        photo: "templates/photo_2025-06-25_23-56-05.jpg",
+        content: `
+            <h3>1940-е годы</h3>
+            
+            <h4>Первые шаги к атомной бомбе (1940-1942)</h4>
+            <ul>
+                <li><strong>1940</strong> — Ф.Ф. Ланге предлагает проект урановой бомбы (работы заморожены из-за войны)</li>
+                <li><strong>1942</strong> — Разведка докладывает Сталину о ядерных программах США и Германии</li>
+                <li><strong>28 сентября 1942</strong> — Постановление ГКО «Об организации работ по урану» — официальное начало проекта</li>
+            </ul>
+            
+            <h4>Создание научной базы (1943-1945)</h4>
+            <ul>
+                <li><strong>1943</strong> — Основана Лаборатория № 2 (будущий Курчатовский институт) под руководством И.В. Курчатова</li>
+                <li><strong>1945</strong> — После испытания американской бомбы (Хиросима) проект получает максимальный приоритет</li>
+                <li><strong>20 августа 1945</strong> — Создан Специальный комитет под руководством Л.П. Берии</li>
+            </ul>
+            
+            <h4>Строительство уральских объектов (1946-1948)</h4>
+            <ul>
+                <li><strong>1946</strong> — Начато строительство Комбината № 817 (Челябинск-40, ПО «Маяк»)</li>
+                <li><strong>1947</strong> — Заложен Завод № 813 (Свердловск-44, Новоуральск) для обогащения урана</li>
+                <li><strong>7 июня 1948</strong> — Запуск первого промышленного реактора «Аннушка»</li>
+            </ul>
+            
+            <h4>Первое испытание (1949)</h4>
+            <ul>
+                <li><strong>29 августа 1949</strong> — Взрыв первой советской атомной бомбы РДС-1 на Семипалатинском полигоне (22 кт)</li>
+            </ul>
+        `
+    },
+    {
+        photo: "templates/photo_2025-06-25_23-56-24.jpg",
+        content: `
+            <h3>1950-е годы</h3>
+            <h4>Развитие ядерной программы</h4>
+            <ul>
+                <li><strong>1953</strong> — Испытание первой термоядерной бомбы РДС-6с</li>
+                <li><strong>1954</strong> — Запуск первой в мире АЭС в Обнинске</li>
+                <li><strong>1957</strong> — Авария на комбинате «Маяк» (Кыштымская катастрофа)</li>
+            </ul>
+            
+            <h4>Расширение уральских производств</h4>
+            <ul>
+                <li>Создание закрытых городов: Снежинск, Лесной, Трёхгорный</li>
+                <li>Развитие ядерного оружейного комплекса на Урале</li>
+                <li>Начало производства компонентов для термоядерного оружия</li>
+            </ul>
+        `
+    },
+    {
+        photo: "templates/photo_2025-06-25_23-56-40.jpg",
+        content: `
+            <h3>1960-е годы и далее</h3>
+            <h4>Мощные испытания и развитие</h4>
+            <ul>
+                <li><strong>1961</strong> — Испытание самой мощной в истории бомбы («Царь-бомба», 58 Мт)</li>
+                <li><strong>1964</strong> — Запуск Белоярской АЭС - первой промышленной атомной станции на Урале</li>
+            </ul>
+            
+            <h4>Наследие проекта</h4>
+            <ul>
+                <li><strong>1986</strong> — Авария на Чернобыльской АЭС</li>
+                <li><strong>1990-е</strong> — Рассекречивание архивов, экологические исследования на Урале</li>
+                <li>Создание системы радиационной безопасности</li>
+            </ul>
+        `
+    }
+];
+            
+
+
+    
+        
+        // Рассчитываем позиции для каждой кнопки
+        function calculateButtonPositions() {
+            const positions = [];
+            const yearButtons = yearsContainer.querySelectorAll('.year');
+            
+            yearButtons.forEach(button => {
+                const rect = button.getBoundingClientRect();
+                const sliderRect = slider.getBoundingClientRect();
+                
+                // Рассчитываем позицию относительно слайдера
+                const position = rect.left - sliderRect.left;
+                positions.push(position);
+            });
+            
+            return positions;
+        }
+        
+        // Функция для перемещения блока
+        function moveBlockToYear(index) {
+            const positions = calculateButtonPositions();
+            const yearButtons = yearsContainer.querySelectorAll('.year');
+            
+            if (index >= 0 && index < positions.length) {
+                const button = yearButtons[index];
+                const buttonRect = button.getBoundingClientRect();
+                
+                // Рассчитываем центр кнопки
+                const buttonCenter = positions[index] + buttonRect.width / 2;
+                
+                // Рассчитываем позицию для блока (центрируем)
+                const blockPosition = buttonCenter - draggableBlock.offsetWidth / 2;
+                
+                // Устанавливаем новую позицию
+                draggableBlock.style.left = `${blockPosition}px`;
+                
+                // Обновляем активную кнопку
+                years.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Обновляем контент события
+                updateEventContent(index);
+            }
+        }
+        
+        // Функция обновления контента события
+        function updateEventContent(index) {
+            const event = events[index];
+            eventContent.innerHTML = `
+                ${event.content}
+            `;
+            eventPhoto.innerHTML = `
+                <img src="${event.photo}">
+            `;
+            eventContent.classList.remove('animate__animated', 'animate__fadeIn');
+            // Добавляем анимацию с небольшим таймаутом для срабатывания
+            setTimeout(() => {
+                eventContent.classList.add('animate__animated', 'animate__fadeIn');
+            }, 10);
+        }
+        
+        // Добавляем обработчики событий для кнопок
+        years.forEach((yearBtn, index) => {
+            yearBtn.addEventListener('click', () => {
+                moveBlockToYear(index);
+            });
+        });
+        
+        // Обработчик изменения размера окна
+        window.addEventListener('resize', () => {
+            // Перемещаем блок к текущей активной кнопке
+            const activeIndex = [...years].findIndex(btn => btn.classList.contains('active'));
+            if (activeIndex !== -1) {
+                moveBlockToYear(activeIndex);
+            }
+        });
+        
+        // Инициализация: перемещаем блок к первой кнопке
+        moveBlockToYear(0);
+    });
+  </script>
+</body>
+</html>
