@@ -165,9 +165,9 @@
             height: 100%;
             border-radius: 10px;
             backdrop-filter: blur(5px);
+            
         }
         .photo{
-            background-color: aqua;
             width: 40%;
             height: 100%;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -185,6 +185,107 @@
         }
         li{
         font-size: 18px;
+        }
+         @media (min-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+            
+            .content-box {
+                padding: 30px;
+            }
+            
+            .header-buttons {
+                width: 130px;
+                height: 42px;
+                font-size: 16px;
+                margin: 0 7px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content-container {
+                flex-direction: row;
+            }
+            
+            .event-content {
+                width: 60%;
+            }
+            
+            .event-photo {
+                width: 40%;
+                height: auto;
+            }
+            
+            .slider {
+                min-width: 800px;
+            }
+            
+            .year {
+                font-size: 20px;
+                padding: 8px 15px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .slider {
+                min-width: 1000px;
+            }
+            
+            .year {
+                font-size: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-buttons {
+                width: 90px;
+                height: 32px;
+                font-size: 12px;
+            }
+            .header{
+                width: 130%;
+            }
+            .content-box{
+                width: 115%;
+                margin-bottom: 20px;
+            }
+            .slider {
+                min-width: 500px;
+                height: 60px;
+            }
+            
+            .year {
+                font-size: 14px;
+                padding: 4px 8px;
+            }
+            
+            .draggable-block {
+                width: 80px;
+                height: 50px;
+            }
+            
+            h2, h3 {
+                font-size: 1.2rem;
+            }
+            
+            p, li {
+                font-size: 14px;
+            }
+            .flex{
+                margin-top: 50px;
+                height: 900px;
+                display: inline;
+            }
+            .text{
+                overflow-x: hidden;
+                width: 130%;
+            }
+            .photo{
+                width: 130%;
+            }
         }
     </style>
 </head>
